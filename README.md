@@ -15,10 +15,6 @@ cd server
 sh start_prism_4011_expected.sh
 ```
 
-```
-prism proxy -p 4010 ../reference/petstore-expected.oas3.yaml http://localhost:4011
-```
-
 ### Running tests
 
 ```bash
