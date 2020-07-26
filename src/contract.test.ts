@@ -33,7 +33,7 @@ describe("API Contract Test", () => {
     // extract HTTP operations from the OAS file and convert them to an array of spec-agnostic objects
     operations = await getHttpOperationsFromResource(
       // resolve(__dirname, "api.oas2.yaml")
-      resolve(__dirname, "petstore-expected.oas3.yaml")
+      resolve(__dirname, "../reference/petstore-expected.oas3.yaml")
     );
     // create a Prism server programmatically
     server = createHttpServer(operations, config);

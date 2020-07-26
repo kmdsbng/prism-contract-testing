@@ -1,5 +1,5 @@
 docker run --rm \
-  -v ${PWD}:/local \
+  -v ${PWD}/../reference:/local \
   -it \
   -p 4011:4011 \
   stoplight/prism:3 mock -p 4011 -h 0.0.0.0 /local/petstore-expected.oas3.yaml
