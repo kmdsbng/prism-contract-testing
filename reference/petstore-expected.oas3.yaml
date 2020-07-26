@@ -49,3 +49,30 @@ paths:
                 required:
                   - name
                   - photoUrls
+  '/persons/{personId}':
+    get:
+      summary: 飼い主の情報
+      tags:
+        - pets
+      responses:
+        '200':
+          description: Get Person Information
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  name:
+                    type: string
+                  email:
+                    type: string
+                  tel:
+                    type: string
+      operationId: showPersonById
+    parameters:
+      - schema:
+          type: string
+        name: personId
+        in: path
+        required: true

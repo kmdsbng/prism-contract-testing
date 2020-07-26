@@ -12,7 +12,11 @@ Run server (今の所、OAS仕様を使ったモックサーバー)
 
 ```
 cd server
-sh start_prism_4011.sh
+sh start_prism_4011_expected.sh
+```
+
+```
+prism proxy -p 4010 ../reference/petstore-expected.oas3.yaml http://localhost:4011
 ```
 
 ### Running tests

@@ -9,7 +9,7 @@ import axios from "axios";
 import { IHttpOperation } from "@stoplight/types";
 import { createLogger } from "@stoplight/prism-core";
 
-const PORT = 4010;
+const PORT = 4009;
 const logger = createLogger("TEST", { enabled: false });
 
 describe("API Contract Test", () => {
@@ -22,7 +22,7 @@ describe("API Contract Test", () => {
       validateRequest: true,
       validateResponse: true,
       // upstream: new URL("http://httpbin"),
-      upstream: new URL("http://0.0.0.0:4011"),
+      upstream: new URL("http://0.0.0.0:4010"),
     } as IHttpConfig,
     components: { logger },
   };
