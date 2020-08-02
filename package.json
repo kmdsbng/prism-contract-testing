@@ -11,10 +11,9 @@
   "devDependencies": {
     "@stoplight/prism-core": "^3.3.4",
     "@stoplight/prism-http-server": "^3.3.5",
-    "@types/axios": "^0.14.0",
     "@types/jest": "^24.0.22",
     "@types/node": "^12.12.7",
-    "axios": "^0.19.0",
+    "axios": "^0.19.2",
     "jest": "^24.9.0",
     "ts-jest": "^24.1.0",
     "typescript": "^3.7.2"

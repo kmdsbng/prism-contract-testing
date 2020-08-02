@@ -3,6 +3,8 @@ import {createServer as createHttpServer} from "@stoplight/prism-http-server";
 import {resolve} from "path";
 import {IPrismHttpServer} from "@stoplight/prism-http-server/dist/types";
 import Axios, {AxiosRequestConfig, Method} from "axios";
+Axios.defaults.adapter = require('axios/lib/adapters/http');
+
 import {IHttpOperation} from "@stoplight/types";
 import {createLogger} from "@stoplight/prism-core";
 import {inspect, InspectOptions} from "util";
@@ -14,7 +16,7 @@ async function sendRequest(axiousRequest: AxiosRequestConfig) {
   return Axios(axiousRequest);
 }
 
-describe("API Contract Test", () => {
+describe("API Contract Test for Server side", () => {
   const config = {
     cors: false,
     config: {
@@ -24,7 +26,8 @@ describe("API Contract Test", () => {
       validateRequest: true,
       validateResponse: true,
       // upstream: new URL("http://httpbin"),
-      upstream: new URL("http://0.0.0.0:4011"),
+      // upstream: new URL("http://0.0.0.0:4011"),
+      upstream: new URL("http://0.0.0.0:8080"),
     } as IHttpConfig,
     components: { logger },
   };
@@ -49,8 +52,8 @@ describe("API Contract Test", () => {
   test('test operations', () => {
     return Promise.all(operations.map(async operation => {
       let request: HttpRequest = operation2Request(operation);
-
       let axiousRequest: AxiosRequestConfig = request.toAxiousRequest();
+      // console.log(axiousRequest);
 
       if (operation.iid == 'showPersonById') {
         const actualUrl: string = request.url.replace('{personId}', '1');
@@ -62,19 +65,17 @@ describe("API Contract Test", () => {
 
       const response = await sendRequest(axiousRequest);
       if (response.headers['sl-violations'] != undefined) {
-        console.log(axiousRequest);
+        // console.log(axiousRequest);
         const option: InspectOptions = {
-            compact: false,
+            compact: true,
             colors: true
         };
 
-        console.log(inspect(response.headers['sl-violations'], option));
+        console.log(`${inspect(axiousRequest, option)}\nerror: ${inspect(response.headers['sl-violations'], option)}`);
       }
       expect(response.headers['sl-violations']).toBeUndefined();
-
     }))
   });
-
 });
 
 class HttpRequest {
