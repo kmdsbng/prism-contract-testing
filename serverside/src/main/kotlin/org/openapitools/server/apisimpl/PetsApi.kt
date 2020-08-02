@@ -15,12 +15,14 @@ package org.openapitools.server.apisimpl
 import com.google.gson.Gson
 import io.ktor.application.call
 import io.ktor.http.ContentType
+import io.ktor.http.HttpStatusCode
 import io.ktor.locations.KtorExperimentalLocationsAPI
 import io.ktor.locations.get
 import io.ktor.response.respond
 import io.ktor.response.respondText
 import io.ktor.routing.Route
 import org.openapitools.server.Paths
+import org.openapitools.server.models.Pet
 
 @KtorExperimentalLocationsAPI
 fun Route.PetsApi() {
@@ -41,12 +43,21 @@ fun Route.PetsApi() {
 
     get { _: Paths.showPetById ->
         // val exampleContentType = "application/json"
-        val exampleContentString = """{
-          "photoUrls" : [ "photoUrls", "photoUrls" ],
-          "name" : "doggie"
-        }"""
-        
-        call.respond(gson.fromJson(exampleContentString, empty::class.java))
+        // val exampleContentString = """{
+        //   "photoUrls" : [ "photoUrls", "photoUrls" ],
+        //   "name" : "doggie"
+        // }"""
+        // call.respond(gson.fromJson(exampleContentString, empty::class.java))
+
+        val data = Pet(
+
+            name = "マンディー", // : kotlin.String,
+            photoUrls = arrayOf("photo url"), // val photoUrls: kotlin.Array<kotlin.String>,
+            status = Pet.Status.available // val status: Pet.Status? = null
+        )
+
+        val status404 = HttpStatusCode.NotFound
+        call.respond(status404, data)
     }
 
 }

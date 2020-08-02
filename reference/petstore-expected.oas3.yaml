@@ -49,6 +49,8 @@ paths:
                 required:
                   - name
                   - photoUrls
+        '404':
+          description: Not Found
   '/persons/{personId}':
     get:
       summary: 飼い主の情報

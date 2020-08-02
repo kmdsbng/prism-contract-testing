@@ -13,6 +13,9 @@ const PORT = 4009;
 const logger = createLogger("TEST", { enabled: false });
 
 async function sendRequest(axiousRequest: AxiosRequestConfig) {
+  axiousRequest.validateStatus = (status): boolean => {
+    return status < 500; // Resolve only if the status code is less than 500
+  };
   return Axios(axiousRequest);
 }
 
